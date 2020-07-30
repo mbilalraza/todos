@@ -88,5 +88,16 @@ module.exports = {
           .status(HttpStatus.NOT_FOUND)
           .json({ message: 'todo not found', todo })
       );
-  }
+  },
+  async RemoveTodo(req, res) {
+    await todos.remove({ _id: req.params.id })
+      .then(todo => {
+        res.status(HttpStatus.OK).json({ message: 'todo removed', todo });
+      })
+      .catch(err =>
+        res
+          .status(HttpStatus.NOT_FOUND)
+          .json({ message: 'todo not found', todo })
+      );
+  },
 };
