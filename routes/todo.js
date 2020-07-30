@@ -7,5 +7,6 @@ const auth = require('../Helpers/auth');
 router.get('/', auth.VerifyToken, todo.GetAllTodos);
 router.get('/:id', auth.VerifyToken, todo.GetTodo);
 router.post('/add', auth.VerifyToken, todo.AddTodo);
+router.post('/edit/:id', auth.VerifyToken, todo.EditTodo);
 
 module.exports = router;

@@ -4,14 +4,7 @@ const bcrypt = require('bcryptjs');
 const userSchema = mongoose.Schema({
   username: { type: String },
   email: { type: String },
-  password: { type: String },
-  todos: [
-    {
-      todoId: { type: mongoose.Schema.Types.ObjectId, ref: 'todos' },
-      todo: { type: String },
-      created: { type: Date, default: Date.now() }
-    }
-  ]
+  password: { type: String }
 });
 
 userSchema.statics.EncryptPassword = async function(password) {
