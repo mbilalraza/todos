@@ -46,6 +46,18 @@ module.exports = {
       });
   },
   async GetAllTodos(req, res) {
+    try {
+      const todos = await todos.find({})
+        .populate('user')
+        .sort({ created: -1 });
+      return res
+        .status(HttpStatus.OK)
+        .json({ message: 'All todos', todos });
+    } catch (err) {
+      return res
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+        .json({ message: 'Error occured' });
+    }
   },
   async GetTodo(req, res) {
   }
