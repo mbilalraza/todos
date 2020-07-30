@@ -77,6 +77,20 @@ module.exports = {
         .json({ message: 'Error occured' });
     }
   },
+  async GetTodoByUser(req, res) {
+    try {
+      const todos = await todos.find({ user: req.user._id })
+        .populate('user')
+        .sort({ created: -1 });
+      return res
+        .status(HttpStatus.OK)
+        .json({ message: 'User todos', todos });
+    } catch (err) {
+      return res
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+        .json({ message: 'Error occured' });
+    }
+  },
   async GetTodo(req, res) {
     await todos.findOne({ _id: req.params.id })
       .populate('user')
