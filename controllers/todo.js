@@ -60,5 +60,15 @@ module.exports = {
     }
   },
   async GetTodo(req, res) {
+    await todos.findOne({ _id: req.params.id })
+      .populate('user')
+      .then(todo => {
+        res.status(HttpStatus.OK).json({ message: 'todo found', todo });
+      })
+      .catch(err =>
+        res
+          .status(HttpStatus.NOT_FOUND)
+          .json({ message: 'todo not found', todo })
+      );
   }
 };
